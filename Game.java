@@ -5,8 +5,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
+
+import SeriousGame.graphics.Screen;
 
 public class Game extends Canvas implements Runnable{
 	
@@ -19,11 +23,18 @@ public class Game extends Canvas implements Runnable{
 	private JFrame frame;
 	private boolean running = false;
 	
+	private Screen screen;
+	
+	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 	// -------GAME----------------------------------------------GAME
 	public Game(){	
 		Dimension size = new Dimension(width*scale, height*scale);
 		setPreferredSize(size);
+		
+		screen = new Screen(width, height);
 		frame = new JFrame();
+		
 	}
 	// -------start----------------------------------------------start
 	public synchronized void start(){
@@ -80,4 +91,11 @@ public class Game extends Canvas implements Runnable{
 		
 		game.start();
 	}
+	
+
+		
+
+	
+
+
 }
