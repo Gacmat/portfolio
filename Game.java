@@ -11,6 +11,7 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 import SeriousGame.graphics.Screen;
+import SeriousGame.input.Keyboard;
 
 public class Game extends Canvas implements Runnable{
 	
@@ -18,9 +19,12 @@ public class Game extends Canvas implements Runnable{
 	public static int width = 320;
 	public static int height = width/4*3;
 	public static int scale = 3;
+	public int acc_mov = 1;
 	
+	public static String title= "Mathroidvania";
 	private Thread thread;
 	private JFrame frame;
+	private Keyboard key = new Keyboard();
 	private boolean running = false;
 	
 	private Screen screen;
@@ -35,6 +39,7 @@ public class Game extends Canvas implements Runnable{
 		screen = new Screen(width, height);
 		frame = new JFrame();
 		
+		addKeyListener(key);	
 	}
 	// -------start----------------------------------------------start
 	public synchronized void start(){
@@ -54,14 +59,46 @@ public class Game extends Canvas implements Runnable{
 	}
 	// -------run--------------------------------------------------run
 	public void run(){
-		new Game();
+		long lastTime = System.nanoTime();
+		long timer = System.currentTimeMillis();
+		final double ns = 1000000000.0 / 60.0;
+		double delta = 0;
+		int frames = 0;
+		int updates = 0;
 		while(running){
-			update();
+			long now = System.nanoTime();
+			delta += (now - lastTime) / ns;
+			lastTime = now;
+			while (delta >=1) {
+				update();
+				updates++;
+				delta--;
+			}
 			render();
+			frames++;
+			
+			if(System.currentTimeMillis() - timer > 1000){
+				timer+=1000;
+				frame.setTitle(title + " | " + updates + " ups, " + frames + " fps");
+				updates = 0;
+				frames = 0;
+			}	
 		}
+		stop();
 	}
+	//=====
+	int x = 0, y = 0;
 	// -------update----------------------------------------------update
-	public void update(){	
+	public void update(){
+		key.update();
+		
+		if(key.shift)
+			acc_mov = 3;
+		else	acc_mov = 1;
+		if(key.up)		y -= acc_mov;
+		if(key.down)	y += acc_mov;
+		if(key.left)	x -= acc_mov;
+		if(key.right)	x += acc_mov; 
 	}
 	// -------render----------------------------------------------render
 	public void render(){
@@ -70,10 +107,18 @@ public class Game extends Canvas implements Runnable{
 			createBufferStrategy(3);
 			return;
 		}
+		screen.clear();
+		screen.render(x, y);
+		
+		for(int i = 0 ; i < pixels.length; i++){
+			pixels[i] = screen.pixels[i];
+		}
+		
 		Graphics g = bs.getDrawGraphics();
 		// Grafika start
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, getWidth(), getHeight());
+		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		// Grafika stop
 		g.dispose();
 		bs.show();
@@ -82,7 +127,7 @@ public class Game extends Canvas implements Runnable{
 	public static void main(String[] args) {
 		Game game = new Game();
 		game.frame.setResizable(false);
-		game.frame.setTitle("Mathroidvania");
+		game.frame.setTitle(Game.title);
 		game.frame.add(game);
 		game.frame.pack();
 		game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,11 +136,4 @@ public class Game extends Canvas implements Runnable{
 		
 		game.start();
 	}
-	
-
-		
-
-	
-
-
 }
