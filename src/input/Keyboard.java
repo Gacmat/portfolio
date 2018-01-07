@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 public class Keyboard implements KeyListener{
 
 	private boolean[] keys = new boolean[120];
-	public boolean up, down, left, right, shift, jump, action;
+	public boolean up, down, left, right, shift, jump, action, esc;
 	
 	public void update(){
 		up 		= keys[KeyEvent.VK_UP] 	  || 	keys[KeyEvent.VK_W];
@@ -16,6 +16,7 @@ public class Keyboard implements KeyListener{
 		shift 	= keys[KeyEvent.VK_SHIFT];
 		jump	= keys[KeyEvent.VK_SPACE];
 		action 	= keys[KeyEvent.VK_E/*F*/];
+		esc		= keys[KeyEvent.VK_ESCAPE];
 		
 	}
 	public void keyPressed(KeyEvent e) {
