@@ -3,9 +3,9 @@ package SeriousGame.level.tile;
 import SeriousGame.graphics.Screen;
 import SeriousGame.graphics.Sprite;
 
-public class BrickTile extends Tile {
+public class MetalTile extends Tile {
 
-	public BrickTile(Sprite sprite) {
+	public MetalTile(Sprite sprite) {
 		super(sprite);
 	}
 	public void render(int x, int y, Screen screen){
@@ -15,4 +15,3 @@ public class BrickTile extends Tile {
 		return true;
 	}
 }
-

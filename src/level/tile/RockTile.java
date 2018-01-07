@@ -3,9 +3,9 @@ package SeriousGame.level.tile;
 import SeriousGame.graphics.Screen;
 import SeriousGame.graphics.Sprite;
 
-public class BrickTile extends Tile {
+public class RockTile extends Tile {
 
-	public BrickTile(Sprite sprite) {
+	public RockTile(Sprite sprite) {
 		super(sprite);
 	}
 	public void render(int x, int y, Screen screen){
