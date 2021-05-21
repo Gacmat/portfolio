@@ -1,1 +1,1 @@
-git, bash etc. settings files
+My setting files for all commonly using programs and features
