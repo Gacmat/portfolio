@@ -4,7 +4,7 @@
     "workbench.settings.editor": "json",
     "editor.fontSize": 16,
     "workbench.startupEditor": "newUntitledFile",
-    "workbench.colorTheme": "Material Theme High Contrast",
+    "workbench.colorTheme": "Slack Theme Dark Mode",
     "workbench.iconTheme": "material-icon-theme",
     "material-icon-theme.hidesExplorerArrows": true,
     "keyboard.dispatch": "keyCode",
@@ -21,4 +21,5 @@
     "editor.quickSuggestionsDelay": 0,
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
+    "editor.multiCursorModifier": "ctrlCmd",
 }
