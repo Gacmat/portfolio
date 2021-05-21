@@ -23,5 +23,30 @@
         "key": "ctrl+shift+`",
         "command": "-workbench.action.terminal.new",
         "when": "terminalProcessSupported"
+    },
+    {
+        "key": "alt+j",
+        "command": "editor.action.addSelectionToNextFindMatch",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+d",
+        "command": "-editor.action.addSelectionToNextFindMatch",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+d",
+        "command": "editor.action.duplicateSelection",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+k",
+        "command": "editor.action.moveSelectionToNextFindMatch",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+d",
+        "command": "-editor.action.moveSelectionToNextFindMatch",
+        "when": "editorFocus"
     }
 ]
